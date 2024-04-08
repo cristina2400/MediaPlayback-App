@@ -1,4 +1,3 @@
-//
 //  ContentView.swift
 //  Media Playback App
 //
@@ -26,9 +25,10 @@ struct Video: Identifiable, Decodable {
 
 struct ContentView: View {
     
+   
+    
     @State var player = AVPlayer()
     @State private var selectedVideo: Video?
-    
     let videos: [Video] = load("videos.json")
 
    
@@ -36,9 +36,9 @@ struct ContentView: View {
 // FIRST VERSION - ADDING THE VIDEOS HERE MANNUALY //
     
 //    let videos = [
-//        Video(name: "Karol G - Contigo", fileName: "latinmusic", image: "contigo"),
-//        Video(name: "Video 2", fileName: "video2", image: "contigo"),
-//        Video(name: "Video 3", fileName: "video3", image: "contigo")
+//        Video(name: "Karol G - Contigo", fileName: "video1", image: "karolg"),
+//        Video(name: "Ariana Grande - ", fileName: "video2", image: "ariana"),
+//        Video(name: "Kali Uchis - ", fileName: "video3", image: "kali")
 //
 //    ]
 
@@ -70,13 +70,7 @@ struct ContentView: View {
                          }
                     Spacer()
                          
-                
-//                         if let selectedVideo = selectedVideo {
-//                             VideoPlayer(player: player)
-//                                 .onAppear {
-//                                     playVideo(selectedVideo)
-//                                 }
-//                         }
+
                     
                     if selectedVideo != nil {
                                         VideoPlayer(player: player)
@@ -100,13 +94,34 @@ struct ContentView: View {
             
         }
         
-        
+
         
     }
     
+    func setupAudioSession() {
+        do {
+
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+            print("Audio session is now active and configured for playback.")
+
+        } catch {
+            print("Failed to set up audio session: \(error)")
+        }
+    }
+
     
     func playVideo(_ video: Video) {
-        setupBackgroundAudio()
+
+        
+            do {
+                try AVAudioSession.sharedInstance().setCategory(.playback)
+                try AVAudioSession.sharedInstance().setActive(true)
+                print("Audio session is now active and configured for playback.")
+            } catch {
+                print("Failed to set audio session category. Make sure to handle this properly.")
+            }
+        
       
         // Pause the current video if it's playing
         self.player.pause()
@@ -119,14 +134,10 @@ struct ContentView: View {
         }
     }
     
-    private func setupBackgroundAudio() {
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.playback)
-            try AVAudioSession.sharedInstance().setActive(true)
-        } catch {
-            print("Failed to set audio session category. Make sure to handle this properly.")
-        }
-    }
+  
+    
+    
+    
 }
     
     

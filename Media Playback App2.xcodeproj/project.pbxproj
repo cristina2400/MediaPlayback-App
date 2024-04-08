@@ -45,6 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CF3BEE302BC3476B007A11B1 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		CF3BEE322BC347A0007A11B1 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		CF955EF82BB3A0D2001454C2 /* Media Playback App2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Media Playback App2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF955EFB2BB3A0D2001454C2 /* Media_Playback_App2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media_Playback_App2App.swift; sourceTree = "<group>"; };
 		CF955EFD2BB3A0D2001454C2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -87,6 +89,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CF3BEE2F2BC3476B007A11B1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CF3BEE322BC347A0007A11B1 /* AVFoundation.framework */,
+				CF3BEE302BC3476B007A11B1 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CF955EEF2BB3A0D2001454C2 = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +105,7 @@
 				CF955F0B2BB3A0D5001454C2 /* Media Playback App2Tests */,
 				CF955F152BB3A0D5001454C2 /* Media Playback App2UITests */,
 				CF955EF92BB3A0D2001454C2 /* Products */,
+				CF3BEE2F2BC3476B007A11B1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};

@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct Media_Playback_App2App: App {
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
