@@ -10,6 +10,8 @@ import AVFoundation
 
 
 
+
+
 struct Video: Identifiable, Decodable {
     let id = UUID()
     let name: String
@@ -25,14 +27,17 @@ struct Video: Identifiable, Decodable {
 
 struct ContentView: View {
     
-   
     
+    
+    @Environment(\.scenePhase) var scenePhase
     @State var player = AVPlayer()
     @State private var selectedVideo: Video?
     let videos: [Video] = load("videos.json")
 
-   
-    
+    init() {
+        configureAudioSession()
+    }
+
 // FIRST VERSION - ADDING THE VIDEOS HERE MANNUALY //
     
 //    let videos = [
@@ -93,35 +98,39 @@ struct ContentView: View {
             }
             
         }
-        
+        .onChange(of: scenePhase) { oldPhase, newPhase in
+            switch newPhase {
+            case .active:
+                print("The app is Active")
+                configureAudioSession()
+            case .inactive:
+                print("The app is Inactive")
+                
+            case .background:
+                print("The app has moved to the Background")
+                
+            @unknown default:
+                break
+            }
+        }
 
         
     }
     
-    func setupAudioSession() {
+    func configureAudioSession() {
         do {
-
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [])
             try AVAudioSession.sharedInstance().setActive(true)
             print("Audio session is now active and configured for playback.")
-
         } catch {
-            print("Failed to set up audio session: \(error)")
+            print("Failed to configure audio session. Error: \(error)")
         }
     }
-
     
     func playVideo(_ video: Video) {
 
-        
-            do {
-                try AVAudioSession.sharedInstance().setCategory(.playback)
-                try AVAudioSession.sharedInstance().setActive(true)
-                print("Audio session is now active and configured for playback.")
-            } catch {
-                print("Failed to set audio session category. Make sure to handle this properly.")
-            }
-        
+   
+
       
         // Pause the current video if it's playing
         self.player.pause()
